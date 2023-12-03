@@ -1,0 +1,38 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+// Функція для знаходження мінімальної кількості хвилин
+int findMinMinutes(vector<int>& plates) {
+    int minGorishky = *min_element(plates.begin(), plates.end()); // мінімальна кількість горішків серед усіх тарілок
+    int minutes = 0;
+
+    for (int i = 0; i < plates.size(); ++i) {
+        int difference = plates[i] - minGorishky; // різниця між кількістю горішків на поточній тарілці і мінімальною кількістю
+        minutes += difference;
+    }
+
+    return minutes;
+}
+
+int main() {
+    // Введення вхідних даних
+    int n;
+    cout << "Введіть кількість тарілок (n): ";
+    cin >> n;
+
+    vector<int> plates(n);
+    cout << "Введіть кількість горішків у кожній тарілці:" << endl;
+    for (int i = 0; i < n; ++i) {
+        cout << "Тарілка " << i + 1 << ": ";
+        cin >> plates[i];
+    }
+
+    // Виклик функції та виведення результатів
+    int minMinutes = findMinMinutes(plates);
+    cout << "Мінімальна кількість хвилин: " << minMinutes << endl;
+
+    return 0;
+}
